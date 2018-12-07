@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Navbar } from 'react-bulma-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Navbar } from 'react-bulma-components'
+import { withRouter } from 'react-router-dom'
 
 class NavbarComp extends Component {
   state = { open: false }
@@ -18,6 +19,12 @@ class NavbarComp extends Component {
 
     userSession.signUserOut();
     window.location = '/'
+  }
+
+  goToProfile = () => {
+    const { history, userSession } = this.props
+    const user = userSession.loadUserData()
+    history.push(`/users/${user.username}`)
   }
 
   render() {
@@ -48,6 +55,14 @@ class NavbarComp extends Component {
           {
             isSignedIn &&
             <Navbar.Item
+              onClick={this.goToProfile}
+            >
+              My Profie
+            </Navbar.Item>
+          }
+          {
+            isSignedIn &&
+            <Navbar.Item
               onClick={this.signOut}
             >
               Sign Out
@@ -60,4 +75,4 @@ class NavbarComp extends Component {
   }
 }
 
-export default NavbarComp;
+export default withRouter(NavbarComp);
