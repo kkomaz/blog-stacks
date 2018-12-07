@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { UserSession } from 'blockstack'
 import { appConfig } from 'utils/constants'
-import Dashboard from './Dashboard'
+import Dashboard from '../components/Dashboard'
 
-class Home extends Component {
+class Routes extends Component {
   state = {
     userSession: new UserSession({ appConfig }),
     loadingUser: false,
@@ -33,4 +33,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Routes;

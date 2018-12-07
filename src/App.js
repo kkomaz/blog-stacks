@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { UserSession } from 'blockstack'
 import { Container } from 'react-bulma-components';
-import Login from 'pages/Login';
-import Home from 'pages';
+import Login from 'components/Login';
+import Routes from 'routes';
 import Navbar from 'components/Navbar'
 import 'stylesheets/main.scss';
 
@@ -34,7 +34,7 @@ class App extends Component {
         <Container className="mt-one">
           {
             userSession.isUserSignedIn() ?
-              <Home /> :
+              <Routes /> :
               <Login />
           }
         </Container>
