@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {
   Card,
   Content
 } from 'react-bulma-components'
+import { POST_FILENAME } from 'utils/constants'
 
 class Posts extends Component {
-  static propTypes = {
-    posts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      }).isRequired
-    )
-  }
+  state = { posts: [] }
 
   componentDidMount() {
-    console.log('mounting')
+    this.loadPosts()
   }
 
+  loadPosts() {
+    const { userSession } = this.props
+    const options = { decrypt: false }
+
+    userSession.getFile(POST_FILENAME, options)
+      .then((data) => {
+        this.setState({ posts: JSON.parse(data) })
+      })
+      .catch((err) => console.log(err.message))
+  }
+
+
   render() {
-    const { posts } = this.props
+    const { posts } = this.state
 
     return (
       <Card>

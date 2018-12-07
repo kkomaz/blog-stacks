@@ -24,7 +24,8 @@ class PostForm extends Component {
 
     this.state = {
       title,
-      description
+      description,
+      posts: [],
     }
   }
 
@@ -33,21 +34,30 @@ class PostForm extends Component {
       title: PropTypes.string,
       description: PropTypes.string,
     }).isRequired,
-    posts: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      }).isRequired
-    ),
     userSession: PropTypes.object.isRequired,
+  }
+
+  componentDidMount() {
+    this.loadPosts()
+  }
+
+  loadPosts = () => {
+    const { userSession } = this.props
+    const options = { decrypt: false }
+
+    userSession.getFile(POST_FILENAME, options)
+      .then((data) => {
+        this.setState({ posts: JSON.parse(data) })
+      })
+      .catch((err) => console.log(err.message))
   }
 
   onSubmit = (evt) => {
     evt.preventDefault()
 
     const options = { encrypt: false }
-    const { title, description } = this.state
-    const { history, userSession, posts } = this.props
+    const { title, description, posts } = this.state
+    const { history, userSession } = this.props
     const newPost = {
       id: generateUUID(),
       title,
@@ -119,8 +129,7 @@ PostForm.defaultProps = {
   post: {
     title: '',
     description: ''
-  },
-  posts: []
+  }
 }
 
 export default withRouter(PostForm)
