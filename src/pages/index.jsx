@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { UserSession } from 'blockstack'
 import { appConfig } from 'utils/constants'
+import Dashboard from './Dashboard'
 
 class Home extends Component {
   state = {
@@ -11,12 +12,11 @@ class Home extends Component {
 
   render() {
     const { userSession } = this.state
-    const userInfo = userSession.loadUserData();
-    const { username } = userInfo;
+    const user = userSession.loadUserData();
 
     if(window.location.pathname === '/') {
       return (
-        <Redirect to={`/users/${username}`} />
+        <Redirect to={`/users/${user.username}`} />
       )
     }
 
@@ -24,8 +24,8 @@ class Home extends Component {
       <div className="home">
         <Switch>
           <Route
-            path={`/users/${username}`}
-            render={() => <div>Hello {username}!</div>}
+            path={`/users/${user.username}`}
+            render={() => <Dashboard user={user} />}
           />
         </Switch>
       </div>
