@@ -6,6 +6,7 @@ import {
   Content,
   Table,
 } from 'react-bulma-components'
+import { withRouter } from 'react-router-dom'
 import { POST_FILENAME } from 'utils/constants'
 
 class Posts extends Component {
@@ -40,6 +41,16 @@ class Posts extends Component {
       .catch((err) => console.log(err.message))
   }
 
+  viewPost(postId) {
+    const { history } = this.props
+
+    history.push(`/posts/${postId}`)
+  }
+
+  editPost(postId) {
+    console.log(postId)
+  }
+
   render() {
     const { posts } = this.state
 
@@ -71,12 +82,14 @@ class Posts extends Component {
                         <Button
                           className="mr-one"
                           color="warning"
+                          onClick={() => this.editPost(post.id)}
                         >
                           Edit
                         </Button>
                         <Button
                           className="mr-one"
                           color="info"
+                          onClick={() => this.viewPost(post.id)}
                         >
                           View
                         </Button>
@@ -99,4 +112,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+export default withRouter(Posts)

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Posts from 'pages/Posts'
 import PostCreate from 'pages/Posts/Create'
+import PostView from 'pages/Posts/PostId'
 
 class PostRoutes extends Component {
   render() {
@@ -20,7 +21,7 @@ class PostRoutes extends Component {
         />
         <Route
           path="/posts/:post_id"
-          render={() => <div>Render view posts</div>}
+          render={({ match }) => <PostView userSession={userSession} match={match} />}
         />
       </Switch>
     )

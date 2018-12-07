@@ -58,16 +58,21 @@ class PostForm extends Component {
     const options = { encrypt: false }
     const { title, description, posts } = this.state
     const { history, userSession } = this.props
-    const newPost = {
-      id: generateUUID(),
-      title,
-      description
+    const id = generateUUID()
+
+    const newPostForIndex = {
+      id,
+      title
     }
 
-    userSession.putFile(POST_FILENAME, JSON.stringify([...posts, newPost]), options)
-      .then(() => {
-        history.push('/posts')
-      })
+    const newPostForDetail = { ...newPostForIndex, description }
+
+    const promises = Promise.all([
+      userSession.putFile(POST_FILENAME, JSON.stringify([...posts, newPostForIndex]), options),
+      userSession.putFile(`post-${id}.json`, JSON.stringify(newPostForDetail), options)
+    ])
+
+    promises.then(() => history.push('/posts'))
   }
 
   onChange = (evt) => {

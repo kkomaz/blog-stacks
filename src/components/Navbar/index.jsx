@@ -28,6 +28,12 @@ class NavbarComp extends Component {
     history.push(`/users/${user.username}`)
   }
 
+  goToPosts = () => {
+    const { history } = this.props
+    this.setState({ open: false })
+    history.push('/posts')
+  }
+
   render() {
     const { open } = this.state
     const { userSession } = this.props
@@ -53,6 +59,11 @@ class NavbarComp extends Component {
 
       <Navbar.Menu>
         <Navbar.Container position="end">
+          <Navbar.Item
+            onClick={this.goToPosts}
+          >
+            Posts
+          </Navbar.Item>
           {
             isSignedIn &&
             <Navbar.Item
