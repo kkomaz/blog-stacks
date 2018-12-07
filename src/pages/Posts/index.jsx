@@ -48,7 +48,9 @@ class Posts extends Component {
   }
 
   editPost(postId) {
-    console.log(postId)
+    const { history } = this.props
+
+    history.push(`/posts/${postId}/edit`)
   }
 
   render() {

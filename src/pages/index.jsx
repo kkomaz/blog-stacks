@@ -15,7 +15,7 @@ class Routes extends Component {
     const { userSession } = this.state
     const user = userSession.loadUserData();
 
-    if(window.location.pathname === '/') {
+    if (window.location.pathname === '/') {
       return (
         <Redirect to={`/users/${user.username}`} />
       )

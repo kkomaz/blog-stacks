@@ -6,7 +6,10 @@ class PostsCreate extends Component {
     const { userSession } = this.props;
 
     return (
-      <PostForm userSession={userSession} />
+      <PostForm
+        userSession={userSession}
+        type="create"
+      />
     )
   }
 }
