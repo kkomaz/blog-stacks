@@ -41,7 +41,7 @@ class PostRoutes extends Component {
           />
         <Route
           path="/posts/create"
-          render={() => <PostCreate userSession={userSession} />}
+          render={() => <PostCreate posts={posts} userSession={userSession} />}
         />
         <Route
           path="/posts/:post_id"

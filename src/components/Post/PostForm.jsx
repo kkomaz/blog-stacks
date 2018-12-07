@@ -33,6 +33,12 @@ class PostForm extends Component {
       title: PropTypes.string,
       description: PropTypes.string,
     }).isRequired,
+    posts: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      }).isRequired
+    ),
     userSession: PropTypes.object.isRequired,
   }
 
@@ -41,13 +47,15 @@ class PostForm extends Component {
 
     const options = { encrypt: false }
     const { title, description } = this.state
-    const { history, userSession } = this.props
+    const { history, userSession, posts } = this.props
 
-    userSession.putFile(POST_FILENAME, JSON.stringify([{
+    const updatedPosts = posts.push({
       id: generateUUID(),
       title,
       description
-    }]), options)
+    });
+
+    userSession.putFile(POST_FILENAME, JSON.stringify(updatedPosts), options)
       .then(() => {
         history.push('/posts')
       })
