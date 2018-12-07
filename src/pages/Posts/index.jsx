@@ -17,6 +17,10 @@ class Posts extends Component {
     )
   }
 
+  componentDidMount() {
+    console.log('mounting')
+  }
+
   render() {
     const { posts } = this.props
 

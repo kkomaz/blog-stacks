@@ -24,6 +24,7 @@ class NavbarComp extends Component {
   goToProfile = () => {
     const { history, userSession } = this.props
     const user = userSession.loadUserData()
+    this.setState({ open: false })
     history.push(`/users/${user.username}`)
   }
 

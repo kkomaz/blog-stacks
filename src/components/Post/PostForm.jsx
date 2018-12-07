@@ -48,14 +48,13 @@ class PostForm extends Component {
     const options = { encrypt: false }
     const { title, description } = this.state
     const { history, userSession, posts } = this.props
-
-    const updatedPosts = posts.push({
+    const newPost = {
       id: generateUUID(),
       title,
       description
-    });
+    }
 
-    userSession.putFile(POST_FILENAME, JSON.stringify(updatedPosts), options)
+    userSession.putFile(POST_FILENAME, JSON.stringify([...posts, newPost]), options)
       .then(() => {
         history.push('/posts')
       })
@@ -120,7 +119,8 @@ PostForm.defaultProps = {
   post: {
     title: '',
     description: ''
-  }
+  },
+  posts: []
 }
 
 export default withRouter(PostForm)
