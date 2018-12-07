@@ -28,13 +28,13 @@ class NavbarComp extends Component {
 
     return (
       <Navbar
-        color="primary"
+        color="info"
         fixed="top"
         active={open}
       >
       <Navbar.Brand>
         <Navbar.Item renderAs="a" href="#">
-          <i class="fas fa-stroopwafel" style={{ marginRight: '10px' }}></i>
+          <i className="fas fa-stroopwafel" style={{ marginRight: '10px' }}></i>
           <p>Blog Stacks</p>
         </Navbar.Item>
 

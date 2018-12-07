@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { UserSession } from 'blockstack'
 import { Container } from 'react-bulma-components';
 import Login from 'pages/Login';
-import NavbarComp from 'components/NavbarComp'
+import Navbar from 'components/Navbar'
 import './App.scss';
 
 class App extends Component {
   state = {
     userSession: new UserSession(),
-    open: false,
   }
 
   componentDidMount = async () => {
@@ -29,7 +28,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <NavbarComp userSession={userSession} />
+        <Navbar userSession={userSession} />
 
         <Container>
           {
