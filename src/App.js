@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { UserSession } from 'blockstack'
-import { Container, Navbar } from 'react-bulma-components';
+import { Container } from 'react-bulma-components';
 import Login from 'pages/Login';
+import NavbarComp from 'components/NavbarComp'
 import './App.scss';
 
 class App extends Component {
@@ -19,46 +20,16 @@ class App extends Component {
       if (!userData.username) {
         throw new Error('This app requires a username')
       }
+      window.location = '/';
     }
   }
 
-  toggleNavbar = () => {
-    this.setState({ open: !this.state.open })
-  }
-
   render() {
-    const { userSession, open } = this.state
+    const { userSession } = this.state
 
     return (
       <div className="App">
-        <Navbar
-          color="primary"
-          fixed="top"
-          active={open}
-        >
-        <Navbar.Brand>
-          <Navbar.Item renderAs="a" href="#">
-            <img
-              src="https://bulma.io/images/bulma-logo.png"
-              alt="Bulma: a modern CSS framework based on Flexbox"
-              width="112"
-              height="28"
-            />
-          </Navbar.Item>
-
-          <Navbar.Burger
-            onClick={this.toggleNavbar}
-          />
-        </Navbar.Brand>
-
-        <Navbar.Menu>
-          <Navbar.Container position="end">
-            <Navbar.Item href="/">Home</Navbar.Item>
-            <Navbar.Item href="/about"> About Us</Navbar.Item>
-            <Navbar.Item href="/contact"> Contact Us</Navbar.Item>
-          </Navbar.Container>
-        </Navbar.Menu>
-        </Navbar>
+        <NavbarComp userSession={userSession} />
 
         <Container>
           {
