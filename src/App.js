@@ -3,7 +3,7 @@ import { UserSession } from 'blockstack'
 import { Container } from 'react-bulma-components';
 import Login from 'pages/Login';
 import Navbar from 'components/Navbar'
-import './App.scss';
+import 'stylesheets/main.scss';
 
 class App extends Component {
   state = {
@@ -30,7 +30,7 @@ class App extends Component {
       <div className="App">
         <Navbar userSession={userSession} />
 
-        <Container>
+        <Container className="mt-one">
           {
             userSession.isUserSignedIn() ?
               <div>Signed in page</div> :
