@@ -10,24 +10,24 @@ import { withRouter } from 'react-router-dom'
 
 class Username extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    username: PropTypes.string.isRequired,
   }
 
   navigateToCreatePost = () => {
-    const { history } = this.props
+    const { history, username } = this.props
 
-    history.push('/posts/create')
+    history.push(`/admin/${username}/posts/create`)
   }
 
   render() {
-    const { user } = this.props;
+    const { username } = this.props;
 
     return (
       <div className="username">
         <Card>
           <Card.Content>
             <Content>
-              <Heading renderAs="h2">Hello {user.username}!</Heading>
+              <Heading renderAs="h2">Hello {username}!</Heading>
               <Button
                 color="primary"
                 onClick={this.navigateToCreatePost}

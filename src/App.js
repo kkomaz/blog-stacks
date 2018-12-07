@@ -26,15 +26,16 @@ class App extends Component {
 
   render() {
     const { userSession } = this.state
+    const user = userSession.loadUserData()
 
     return (
       <div className="App">
-        <Navbar userSession={userSession} />
+        <Navbar userSession={userSession} user={user} />
 
         <Container className="mt-one">
           {
             userSession.isUserSignedIn() ?
-              <Routes /> :
+              <Routes userSession={userSession} /> :
               <Login />
           }
         </Container>

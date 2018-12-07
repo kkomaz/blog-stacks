@@ -42,15 +42,15 @@ class Posts extends Component {
   }
 
   viewPost(postId) {
-    const { history } = this.props
+    const { history, username } = this.props
 
-    history.push(`/posts/${postId}`)
+    history.push(`/admin/${username}/posts/${postId}`)
   }
 
   editPost(postId) {
-    const { history } = this.props
+    const { history, username } = this.props
 
-    history.push(`/posts/${postId}/edit`)
+    history.push(`/admin/${username}/posts/${postId}/edit`)
   }
 
   render() {

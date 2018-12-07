@@ -22,16 +22,15 @@ class NavbarComp extends Component {
   }
 
   goToProfile = () => {
-    const { history, userSession } = this.props
-    const user = userSession.loadUserData()
+    const { history, user } = this.props
     this.setState({ open: false })
-    history.push(`/users/${user.username}`)
+    history.push(`/admin/${user.username}`)
   }
 
   goToPosts = () => {
-    const { history } = this.props
+    const { history, user } = this.props
     this.setState({ open: false })
-    history.push('/posts')
+    history.push(`/admin/${user.username}/posts`)
   }
 
   render() {
