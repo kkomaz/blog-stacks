@@ -14,8 +14,7 @@ import {
   Content
 } from 'react-bulma-components'
 import { POST_FILENAME } from 'utils/constants'
-import { UserSession } from 'blockstack'
-import { appConfig } from 'utils/constants'
+import generateUUID from 'utils/generateUUID'
 
 class PostForm extends Component {
   constructor(props) {
@@ -24,7 +23,6 @@ class PostForm extends Component {
     const { title, description } = props
 
     this.state = {
-      userSession: new UserSession({ appConfig }),
       title,
       description
     }
@@ -34,17 +32,19 @@ class PostForm extends Component {
     post: PropTypes.shape({
       title: PropTypes.string,
       description: PropTypes.string,
-    }).isRequired
+    }).isRequired,
+    userSession: PropTypes.object.isRequired,
   }
 
-  onSubmit = (evt, somethingelse) => {
+  onSubmit = (evt) => {
     evt.preventDefault()
 
     const options = { encrypt: false }
-    const { title, description, userSession } = this.state
-    const { history } = this.props
+    const { title, description } = this.state
+    const { history, userSession } = this.props
 
     userSession.putFile(POST_FILENAME, JSON.stringify([{
+      id: generateUUID(),
       title,
       description
     }]), options)

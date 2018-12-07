@@ -30,7 +30,7 @@ class Routes extends Component {
           />
           <Route
             path="/posts"
-            render={() => <PostsRoutes user={user} />}
+            render={() => <PostsRoutes user={user} userSession={userSession} />}
           />
         </Switch>
       </div>
