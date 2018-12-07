@@ -2,24 +2,38 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   Heading,
+  Button,
   Card,
   Content,
 } from 'react-bulma-components'
+import { withRouter } from 'react-router-dom'
 
-class Dashboard extends Component {
+class Username extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
+  }
+
+  navigateToCreatePost = () => {
+    const { history } = this.props
+
+    history.push('/posts/create')
   }
 
   render() {
     const { user } = this.props;
 
     return (
-      <div className="dashboard">
+      <div className="username">
         <Card>
           <Card.Content>
             <Content>
               <Heading renderAs="h2">Hello {user.username}!</Heading>
+              <Button
+                color="primary"
+                onClick={this.navigateToCreatePost}
+              >
+                Create Post
+              </Button>
             </Content>
           </Card.Content>
         </Card>
@@ -28,4 +42,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+export default withRouter(Username)

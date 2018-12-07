@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { UserSession } from 'blockstack'
 import { appConfig } from 'utils/constants'
-import Dashboard from '../components/Dashboard'
+import Username from 'pages/Users/Username'
+import PostsRoutes from './Posts/indexRoute'
 
 class Routes extends Component {
   state = {
@@ -25,7 +26,11 @@ class Routes extends Component {
         <Switch>
           <Route
             path={`/users/${user.username}`}
-            render={() => <Dashboard user={user} />}
+            render={() => <Username user={user} />}
+          />
+          <Route
+            path="/posts"
+            render={() => <PostsRoutes user={user} />}
           />
         </Switch>
       </div>
