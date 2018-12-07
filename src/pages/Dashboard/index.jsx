@@ -5,6 +5,7 @@ import {
   Card,
   Content,
 } from 'react-bulma-components'
+import { Switch, Route } from 'react-router-dom';
 
 class Dashboard extends Component {
   static propTypes = {
@@ -23,6 +24,22 @@ class Dashboard extends Component {
             </Content>
           </Card.Content>
         </Card>
+        <Switch>
+          <Route
+            exact
+            path="/users/kkomaz.id/posts"
+            render={() => <div>Hello Posts</div>}
+          />
+        <Route
+          exact
+          path="/users/kkomaz.id/posts/create"
+          render={() => <div>create Posts</div>}
+          />
+          <Route
+            path="/users/kkomaz.id/posts/:post_id"
+            render={() => <div>View Post</div>}
+          />
+        </Switch>
       </div>
     )
   }
