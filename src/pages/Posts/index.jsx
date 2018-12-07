@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import {
+  Button,
   Card,
-  Content
+  Content,
+  Table,
 } from 'react-bulma-components'
 import { POST_FILENAME } from 'utils/constants'
 
@@ -24,6 +26,19 @@ class Posts extends Component {
       .catch((err) => console.log(err.message))
   }
 
+  deletePost(postId) {
+    const { userSession } = this.props
+    const { posts } = this.state
+    const options = { encrypt: false }
+
+    const filteredPosts = _.filter(posts, (post) => post.id !== postId)
+
+    userSession.putFile(POST_FILENAME, JSON.stringify(filteredPosts), options)
+      .then(() => {
+        this.setState({ posts: filteredPosts })
+      })
+      .catch((err) => console.log(err.message))
+  }
 
   render() {
     const { posts } = this.state
@@ -32,15 +47,51 @@ class Posts extends Component {
       <Card>
         <Card.Content>
           <Content>
-            <ul>
-              {
-                _.map(posts, (post) => (
-                  <li key={post.id}>
-                    {post.title}
-                  </li>
-                ))
-              }
-            </ul>
+            <Table>
+              <thead>
+                <tr>
+                  <th>
+                    Id
+                  </th>
+                  <th>
+                    Title
+                  </th>
+                  <th>
+                    Options
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  _.map(posts, (post) => (
+                    <tr key={post.id}>
+                      <th>{post.id}</th>
+                      <td>{post.title}</td>
+                      <td>
+                        <Button
+                          className="mr-one"
+                          color="warning"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          className="mr-one"
+                          color="info"
+                        >
+                          View
+                        </Button>
+                        <Button
+                          onClick={() => this.deletePost(post.id)}
+                          color="danger"
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </Table>
           </Content>
         </Card.Content>
       </Card>
