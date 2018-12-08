@@ -21,6 +21,7 @@ class PostRoutes extends Component {
           render={() => <PostCreate userSession={userSession} />}
         />
         <Route
+          exact
           path={`${match.url}/:post_id`}
           render={({ match }) => <PostView userSession={userSession} match={match} />}
         />

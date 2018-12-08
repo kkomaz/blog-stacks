@@ -59,7 +59,7 @@ class NavbarComp extends Component {
         active={open}
       >
       <Navbar.Brand>
-        <Navbar.Item renderAs="a" href="#">
+        <Navbar.Item onClick={this.goToProfile}>
           <i className="fas fa-stroopwafel" style={{ marginRight: '10px' }}></i>
           <p>Blog Stacks</p>
         </Navbar.Item>
