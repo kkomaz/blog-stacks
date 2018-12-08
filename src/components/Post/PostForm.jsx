@@ -50,7 +50,11 @@ class PostForm extends Component {
 
     userSession.getFile(POST_FILENAME, options)
       .then((data) => {
-        this.setState({ posts: JSON.parse(data) })
+        if (data) {
+          return this.setState({ posts: JSON.parse(data) })
+        }
+
+        return this.setState({ posts: [] })
       })
       .catch((err) => console.log(err.message))
   }
