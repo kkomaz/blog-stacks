@@ -26,11 +26,10 @@ class App extends Component {
 
   render() {
     const { userSession } = this.state
-    const user = userSession.loadUserData()
 
     return (
       <div className="App">
-        <Navbar userSession={userSession} user={user} />
+        <Navbar userSession={userSession} />
 
         <Container className="mt-one">
           {

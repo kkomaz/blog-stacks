@@ -10,6 +10,15 @@ class NavbarComp extends Component {
     userSession: PropTypes.object.isRequired,
   }
 
+  componentDidMount() {
+    const { userSession } = this.props
+
+    if (userSession.isUserSignedIn()) {
+      const user = userSession.loadUserData()
+      this.setState({ user })
+    }
+  }
+
   toggleNavbar = () => {
     this.setState({ open: !this.state.open })
   }
@@ -22,13 +31,17 @@ class NavbarComp extends Component {
   }
 
   goToProfile = () => {
-    const { history, user } = this.props
+    const { history } = this.props
+    const { user } = this.state
+
     this.setState({ open: false })
     history.push(`/admin/${user.username}`)
   }
 
   goToPosts = () => {
-    const { history, user } = this.props
+    const { history } = this.props
+    const { user } = this.state
+
     this.setState({ open: false })
     history.push(`/admin/${user.username}/posts`)
   }
@@ -58,27 +71,22 @@ class NavbarComp extends Component {
 
       <Navbar.Menu>
         <Navbar.Container position="end">
-          <Navbar.Item
-            onClick={this.goToPosts}
-          >
-            Posts
-          </Navbar.Item>
-          {
-            isSignedIn &&
-            <Navbar.Item
-              onClick={this.goToProfile}
-            >
-              My Profie
-            </Navbar.Item>
-          }
-          {
-            isSignedIn &&
-            <Navbar.Item
-              onClick={this.signOut}
-            >
-              Sign Out
-            </Navbar.Item>
-          }
+            {
+              isSignedIn &&
+              <React.Fragment>
+                <Navbar.Item onClick={this.goToPosts}>
+                  Posts
+                </Navbar.Item>
+
+                <Navbar.Item onClick={this.goToProfile}>
+                  My Profie
+                </Navbar.Item>
+
+                <Navbar.Item onClick={this.signOut}>
+                  Sign Out
+                </Navbar.Item>
+              </React.Fragment>
+            }
         </Navbar.Container>
       </Navbar.Menu>
       </Navbar>
