@@ -36,6 +36,7 @@ class PostForm extends Component {
       description: PropTypes.string,
     }).isRequired,
     userSession: PropTypes.object.isRequired,
+    username: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }
 
@@ -70,7 +71,7 @@ class PostForm extends Component {
   createPost() {
     const options = { encrypt: false }
     const { title, description, posts } = this.state
-    const { history, userSession } = this.props
+    const { history, userSession, username } = this.props
     const id = generateUUID()
 
     const newPostForIndex = {
@@ -85,13 +86,13 @@ class PostForm extends Component {
       userSession.putFile(`post-${id}.json`, JSON.stringify(newPostForDetail), options)
     ])
 
-    promises.then(() => history.push('/posts'))
+    promises.then(() => history.push(`/admin/${username}/posts`))
   }
 
   editPost() {
     const options = { encrypt: false }
     const { title, description, posts } = this.state
-    const { history, userSession, post } = this.props
+    const { history, userSession, post, username } = this.props
 
     const editPostForIndex = {
       id: post.id,
@@ -112,7 +113,7 @@ class PostForm extends Component {
       userSession.putFile(`post-${post.id}.json`, JSON.stringify(editPostForDetail), options)
     ])
 
-    promises.then(() => history.push('/posts'))
+    promises.then(() => history.push(`/admin/${username}/posts`))
   }
 
   render() {

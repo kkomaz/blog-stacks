@@ -18,7 +18,7 @@ class PostRoutes extends Component {
         />
         <Route
           path={`${match.url}/create`}
-          render={() => <PostCreate userSession={userSession} />}
+          render={() => <PostCreate userSession={userSession} username={username} />}
         />
         <Route
           exact
@@ -27,7 +27,7 @@ class PostRoutes extends Component {
         />
         <Route
           path={`${match.url}/:post_id/edit`}
-          render={({ match }) => <PostEdit userSession={userSession} match={match} />}
+          render={({ match }) => <PostEdit userSession={userSession} match={match} username={username} />}
         />
       </Switch>
     )

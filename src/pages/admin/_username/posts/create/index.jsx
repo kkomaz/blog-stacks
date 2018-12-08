@@ -3,12 +3,13 @@ import PostForm from 'components/Post/PostForm'
 
 class PostsCreate extends Component {
   render() {
-    const { userSession } = this.props;
+    const { userSession, username } = this.props;
 
     return (
       <PostForm
-        userSession={userSession}
         type="create"
+        username={username}
+        userSession={userSession}
       />
     )
   }

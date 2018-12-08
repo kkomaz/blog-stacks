@@ -18,7 +18,7 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { userSession } = this.props
+    const { userSession, username } = this.props
     const { post, loading } = this.state
 
     if (loading) {
@@ -27,9 +27,10 @@ class PostEdit extends Component {
 
     return (
       <PostForm
-        userSession={userSession}
         post={post}
         type="edit"
+        username={username}
+        userSession={userSession}
       />
     )
   }
