@@ -3,13 +3,11 @@ import PostForm from 'components/Post/PostForm'
 import Loader from 'components/Loader'
 
 class PostEdit extends Component {
-  state = { post: {}, loading: false }
+  state = { post: {}, loading: true }
 
   componentDidMount = () => {
     const { userSession, match } = this.props
     const options = { decrypt: false }
-
-    this.setState({ loading: true })
 
     userSession.getFile(`post-${match.params.post_id}.json`, options)
       .then((data) => {
