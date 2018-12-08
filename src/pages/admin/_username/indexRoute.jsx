@@ -6,25 +6,36 @@ import Username from 'pages/admin/_username'
 import PostRoute from 'pages/admin/_username/posts/indexRoute'
 
 class UsernameRoute extends Component {
-  state = {
-    userSession: new UserSession({ appConfig }),
+  constructor(props) {
+    super(props)
+
+    const userSession = new UserSession({ appConfig })
+
+    this.state = {
+      userSession,
+      user: userSession.loadUserData()
+    }
   }
 
   render() {
-    const { userSession } = this.state
-    const user = userSession.loadUserData();
-    const username = user.username
+    const { userSession, user } = this.state
 
     return (
       <Switch>
         <Route
           exact
-          path={`/admin/${username}`}
-          render={() => <Username username={username} />}
+          path={`/admin/${user.username}`}
+          render={() => <Username username={user.username} />}
         />
         <Route
-          path={`/admin/${username}/posts`}
-          render={({ match }) => <PostRoute match={match} userSession={userSession} username={username}/>}
+          path={`/admin/${user.username}/posts`}
+          render={({ match }) =>
+            <PostRoute
+              match={match}
+              username={user.username}
+              userSession={userSession}
+            />
+          }
         />
       </Switch>
     )
