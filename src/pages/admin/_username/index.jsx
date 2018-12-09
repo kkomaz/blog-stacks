@@ -7,6 +7,7 @@ import {
   Content,
 } from 'react-bulma-components'
 import { withRouter } from 'react-router-dom'
+import { MyContext } from 'components/User/UserProvider'
 
 class Username extends Component {
   static propTypes = {
@@ -34,6 +35,13 @@ class Username extends Component {
               >
                 Create Post
               </Button>
+              <MyContext.Consumer>
+                {(context) => (
+                  <React.Fragment>
+                    <p>{context.state.currentUser.username}</p>
+                  </React.Fragment>
+                )}
+              </MyContext.Consumer>
             </Content>
           </Card.Content>
         </Card>
@@ -41,5 +49,7 @@ class Username extends Component {
     )
   }
 }
+
+Username.contextType = MyContext
 
 export default withRouter(Username)
