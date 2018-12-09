@@ -7,7 +7,6 @@ import {
   Content,
   Columns
 } from 'react-bulma-components'
-import { Input, Label } from 'react-bulma-components/lib/components/form'
 import { withRouter } from 'react-router-dom'
 import { MyContext } from 'components/User/UserProvider'
 
@@ -28,11 +27,13 @@ class Username extends Component {
     this.setState({ searchedWord: evt.target.value })
   }
 
-  searchUserPosts = () => {
+  handleKeyPress = (evt) => {
     const { history } = this.props
     const { searchedWord } = this.state
 
-    history.push(`/${searchedWord}/posts`)
+    if (evt.key === 'Enter') {
+      history.push(`/${searchedWord}/posts`)
+    }
   }
 
   render() {
@@ -54,16 +55,18 @@ class Username extends Component {
               <div className="mt-one">
                 <Columns>
                   <Columns.Column size={6}>
-                    <Label>Explore Users Posts</Label>
-                    <Input
-                      type="text"
-                      value={this.state.searchedWord}
-                      onChange={this.onChange}
-                      onKeyPress={this.handleKeyPress}
-                    />
-                    <Button onClick={this.searchUserPosts}>
-                      Click here to search!
-                    </Button>
+                    <div className="field">
+                      <label className="label">Explore User's posts!</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="Type here"
+                          onChange={this.onChange}
+                          onKeyPress={this.handleKeyPress}
+                        />
+                      </div>
+                    </div>
                   </Columns.Column>
                 </Columns>
               </div>
@@ -83,6 +86,5 @@ class Username extends Component {
   }
 }
 
-Username.contextType = MyContext
-
 export default withRouter(Username)
+Username.contextType = MyContext
