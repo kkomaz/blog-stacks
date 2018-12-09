@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import UsernameRoute from 'pages/admin/_username/indexRoute'
+import UsernamePostsRoute from 'pages/username/posts/indexRoute'
 import Loader from 'components/Loader'
 import UserProvider from 'components/User/UserProvider'
 
@@ -37,8 +38,8 @@ class Routes extends Component {
               render={({ match }) => <UsernameRoute match={match} />}
             />
             <Route
-              path="/posts"
-              render={() => <div>Posts</div>}
+              path="/:username/posts"
+              render={({ match }) => <UsernamePostsRoute match={match} />}
             />
           </Switch>
         </div>
