@@ -4,11 +4,12 @@ import { Container } from 'react-bulma-components';
 import Login from 'components/Login';
 import Routes from 'pages';
 import Navbar from 'components/Navbar'
+import { appConfig } from 'utils/constants'
 import 'stylesheets/main.scss';
 
 class App extends Component {
   state = {
-    userSession: new UserSession(),
+    userSession: new UserSession({ appConfig }),
   }
 
   componentDidMount = async () => {
@@ -35,7 +36,7 @@ class App extends Component {
           {
             userSession.isUserSignedIn() ?
               <Routes userSession={userSession} /> :
-              <Login />
+              <Login userSession={userSession} />
           }
         </Container>
       </div>

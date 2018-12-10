@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
-import { UserSession } from 'blockstack'
 import {
   Card,
   Content,
   Button,
-} from 'react-bulma-components';
-import { appConfig } from 'utils/constants'
+} from 'react-bulma-components'
 import Loader from 'components/Loader'
 
 class Login extends Component {
   state = {
-    userSession: new UserSession({ appConfig }),
     loadingUser: false,
   }
 
   signIn = (e) => {
-    const { userSession } = this.state;
+    const { userSession } = this.props
 
     e.preventDefault()
     userSession.redirectToSignIn()
