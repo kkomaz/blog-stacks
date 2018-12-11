@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project Details
+Blog Stacks is react application powered by Blockstack. <br>
+This application was built to teach how to use the blockstack library <br>
+Tutorial Videos will be shared via link below
+
+https://www.youtube.com/channel/UCtXf2lbDGQe7h-PpqpAoFig
+
 ## Available Scripts
 
 In the project directory, you can run:

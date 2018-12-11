@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import AdminUsernameRoute from 'pages/admin/_username/route'
 import Loader from 'components/Loader'
 import UserProvider from 'components/User/UserProvider'
-import UsernamePostsRoute from 'pages/username/posts/route'
+import UsernamePostsRoute from 'pages/_username/posts/route'
 
 class Routes extends Component {
   state = { user: {} }
