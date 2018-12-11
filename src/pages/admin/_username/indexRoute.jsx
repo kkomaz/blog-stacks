@@ -4,6 +4,8 @@ import { UserSession } from 'blockstack'
 import { appConfig } from 'utils/constants'
 import Username from 'pages/admin/_username'
 import PostRoute from 'pages/admin/_username/posts/indexRoute'
+import { MyContext } from 'components/User/UserProvider'
+import { withRouter } from 'react-router-dom'
 
 class UsernameRoute extends Component {
   constructor(props) {
@@ -14,6 +16,16 @@ class UsernameRoute extends Component {
     this.state = {
       userSession,
       user: userSession.loadUserData()
+    }
+  }
+
+  componentDidMount() {
+    const { history } = this.props
+    const { currentUser } = this.context.state
+    const { username } = this.props.match.params
+
+    if (currentUser.username !== username) {
+      history.push(`/admin/${currentUser.username}`)
     }
   }
 
@@ -42,4 +54,5 @@ class UsernameRoute extends Component {
   }
 }
 
-export default UsernameRoute
+export default withRouter(UsernameRoute)
+UsernameRoute.contextType = MyContext
