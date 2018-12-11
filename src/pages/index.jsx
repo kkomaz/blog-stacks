@@ -26,23 +26,21 @@ class Routes extends Component {
 
     return (
       <UserProvider userSession={userSession}>
-        <div className="home">
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => window.location.pathname === '/' && <Redirect to={`/admin/${user.username}`} />}
-            />
-            <Route
-              path="/admin/:username"
-              render={({ match }) => <UsernameRoute match={match} />}
-            />
-            <Route
-              path="/:username/posts"
-              render={({ match }) => <UsernamePostsRoute match={match} />}
-            />
-          </Switch>
-        </div>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => window.location.pathname === '/' && <Redirect to={`/admin/${user.username}`} />}
+          />
+          <Route
+            path="/admin/:username"
+            render={({ match }) => <UsernameRoute match={match} />}
+          />
+          <Route
+            path="/:username/posts"
+            render={({ match }) => <UsernamePostsRoute match={match} />}
+          />
+        </Switch>
       </UserProvider>
     );
   }

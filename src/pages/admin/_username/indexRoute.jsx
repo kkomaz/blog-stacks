@@ -1,24 +1,11 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { UserSession } from 'blockstack'
-import { appConfig } from 'utils/constants'
 import Username from 'pages/admin/_username'
 import PostRoute from 'pages/admin/_username/posts/indexRoute'
 import { MyContext } from 'components/User/UserProvider'
 import { withRouter } from 'react-router-dom'
 
 class UsernameRoute extends Component {
-  constructor(props) {
-    super(props)
-
-    const userSession = new UserSession({ appConfig })
-
-    this.state = {
-      userSession,
-      user: userSession.loadUserData()
-    }
-  }
-
   componentDidMount() {
     const { history } = this.props
     const { currentUser } = this.context.state
@@ -30,21 +17,21 @@ class UsernameRoute extends Component {
   }
 
   render() {
-    const { userSession, user } = this.state
+    const { userSession, username } = this.context.state.currentUser
 
     return (
       <Switch>
         <Route
           exact
-          path={`/admin/${user.username}`}
-          render={() => <Username username={user.username} />}
+          path={`/admin/${username}`}
+          render={() => <Username username={username} />}
         />
         <Route
-          path={`/admin/${user.username}/posts`}
+          path={`/admin/${username}/posts`}
           render={({ match }) =>
             <PostRoute
               match={match}
-              username={user.username}
+              username={username}
               userSession={userSession}
             />
           }
