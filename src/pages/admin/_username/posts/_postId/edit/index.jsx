@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PostForm from 'components/Post/PostForm'
 import Loader from 'components/Loader'
+import { MyContext } from 'components/User/UserProvider'
 
-class PostEdit extends Component {
+class AdminPostEdit extends Component {
   state = { post: {}, loading: true }
 
   componentDidMount = () => {
-    const { userSession, match } = this.props
+    const { userSession } = this.context.state.currentUser
+    const { match } = this.props
     const options = { decrypt: false }
 
     userSession.getFile(`post-${match.params.post_id}.json`, options)
@@ -16,7 +18,7 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { userSession, username } = this.props
+    const { userSession, username } = this.context.state.currentUser
     const { post, loading } = this.state
 
     if (loading) {
@@ -34,4 +36,5 @@ class PostEdit extends Component {
   }
 }
 
-export default PostEdit
+AdminPostEdit.contextType = MyContext
+export default AdminPostEdit

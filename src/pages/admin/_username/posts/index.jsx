@@ -6,8 +6,9 @@ import {
 import { withRouter } from 'react-router-dom'
 import PostsTable from 'components/Post/PostsTable'
 import { POST_FILENAME } from 'utils/constants'
+import { MyContext } from 'components/User/UserProvider'
 
-class Posts extends Component {
+class AdminPosts extends Component {
   state = { posts: [] }
 
   componentDidMount() {
@@ -15,7 +16,7 @@ class Posts extends Component {
   }
 
   loadPosts() {
-    const { userSession } = this.props
+    const { userSession } = this.context.state.currentUser
     const options = { decrypt: false }
 
     userSession.getFile(POST_FILENAME, options)
@@ -27,7 +28,7 @@ class Posts extends Component {
 
   render() {
     const { posts } = this.state
-    const { userSession, username } = this.props
+    const { userSession, username } = this.context.state.currentUser
 
     return (
       <Card>
@@ -46,4 +47,5 @@ class Posts extends Component {
   }
 }
 
-export default withRouter(Posts)
+export default withRouter(AdminPosts)
+AdminPosts.contextType = MyContext

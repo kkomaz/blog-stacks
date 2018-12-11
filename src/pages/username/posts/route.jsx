@@ -33,7 +33,7 @@ class UsernamePostsRoute extends Component {
 
   loadPosts() {
     const { username } = this.state
-    const { userSession } = this.context.state
+    const { userSession } = this.context.state.currentUser
 
     const options = { username, decrypt: false, zoneFileLookupURL: 'https://core.blockstack.org/v1/names/'}
 
@@ -46,7 +46,7 @@ class UsernamePostsRoute extends Component {
 
   render() {
     const { error, username, posts } = this.state
-    const { userSession } = this.context.state
+    const { userSession } = this.context.state.currentUser
 
     if (error) {
       return <Error errorMessage={error} />
@@ -57,12 +57,24 @@ class UsernamePostsRoute extends Component {
         <Route
           exact
           path={`/${username}/posts`}
-          render={() => <PostsTable type="public" posts={posts} userSession={userSession} username={username} />}
+          render={() =>
+            <PostsTable
+              posts={posts}
+              type="public"
+              username={username}
+              userSession={userSession}
+            />
+          }
         />
         <Route
           exact
           path={`/${username}/posts/:post_id`}
-          render={({ match }) => <PostDetail userSession={userSession} match={match} />}
+          render={({ match }) =>
+            <PostDetail
+              userSession={userSession}
+              match={match}
+            />
+          }
         />
       </Switch>
     )

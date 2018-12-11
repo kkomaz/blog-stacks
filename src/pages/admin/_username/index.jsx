@@ -8,7 +8,6 @@ import {
   Columns
 } from 'react-bulma-components'
 import { withRouter } from 'react-router-dom'
-import { MyContext } from 'components/User/UserProvider'
 
 class Username extends Component {
   state = { searchedWord: '' }
@@ -70,14 +69,6 @@ class Username extends Component {
                   </Columns.Column>
                 </Columns>
               </div>
-
-              <MyContext.Consumer>
-                {(context) => (
-                  <React.Fragment>
-                    <p>{context.state.currentUser.username}</p>
-                  </React.Fragment>
-                )}
-              </MyContext.Consumer>
             </Content>
           </Card.Content>
         </Card>
@@ -87,4 +78,3 @@ class Username extends Component {
 }
 
 export default withRouter(Username)
-Username.contextType = MyContext

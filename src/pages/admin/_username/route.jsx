@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Username from 'pages/admin/_username'
-import PostRoute from 'pages/admin/_username/posts/indexRoute'
+import AdminUsernamePostsRoute from 'pages/admin/_username/posts/route'
 import { MyContext } from 'components/User/UserProvider'
 import { withRouter } from 'react-router-dom'
 
-class UsernameRoute extends Component {
+class AdminUsernameRoute extends Component {
   componentDidMount() {
     const { history } = this.props
     const { currentUser } = this.context.state
@@ -17,7 +17,7 @@ class UsernameRoute extends Component {
   }
 
   render() {
-    const { userSession, username } = this.context.state.currentUser
+    const { username } = this.context.state.currentUser
 
     return (
       <Switch>
@@ -28,12 +28,7 @@ class UsernameRoute extends Component {
         />
         <Route
           path={`/admin/${username}/posts`}
-          render={({ match }) =>
-            <PostRoute
-              match={match}
-              username={username}
-              userSession={userSession}
-            />
+          render={({ match }) => <AdminUsernamePostsRoute match={match} />
           }
         />
       </Switch>
@@ -41,5 +36,5 @@ class UsernameRoute extends Component {
   }
 }
 
-export default withRouter(UsernameRoute)
-UsernameRoute.contextType = MyContext
+export default withRouter(AdminUsernameRoute)
+AdminUsernameRoute.contextType = MyContext

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import UsernameRoute from 'pages/admin/_username/indexRoute'
-import UsernamePostsRoute from 'pages/username/posts/indexRoute'
+import AdminUsernameRoute from 'pages/admin/_username/route'
 import Loader from 'components/Loader'
 import UserProvider from 'components/User/UserProvider'
+import UsernamePostsRoute from 'pages/username/posts/route'
 
 class Routes extends Component {
   state = { user: {} }
@@ -33,12 +33,12 @@ class Routes extends Component {
             render={() => window.location.pathname === '/' && <Redirect to={`/admin/${user.username}`} />}
           />
           <Route
-            path="/admin/:username"
-            render={({ match }) => <UsernameRoute match={match} />}
-          />
-          <Route
             path="/:username/posts"
             render={({ match }) => <UsernamePostsRoute match={match} />}
+          />
+          <Route
+            path="/admin/:username"
+            render={({ match }) => <AdminUsernameRoute match={match} />}
           />
         </Switch>
       </UserProvider>

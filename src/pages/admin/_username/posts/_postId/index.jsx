@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import PostDetail from 'components/Post/PostDetail'
+import { MyContext } from 'components/User/UserProvider'
 
-class PostView extends Component {
+class AdminPostsView extends Component {
   render() {
-    const { userSession, match } = this.props
+    const { match } = this.props
+    const { userSession } = this.context.state.currentUser
 
-    return <PostDetail userSession={userSession} match={match} />
+    return (
+      <div className="admin-post-view">
+        <PostDetail match={match} userSession={userSession} />
+      </div>
+    )
   }
 }
 
-export default PostView
+AdminPostsView.contextType = MyContext
+export default AdminPostsView

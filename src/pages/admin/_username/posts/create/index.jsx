@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PostForm from 'components/Post/PostForm'
+import { MyContext } from 'components/User/UserProvider'
 
-class PostsCreate extends Component {
+class AdminPostCreate extends Component {
   render() {
-    const { userSession, username } = this.props;
+    const { userSession, username } = this.context.state.currentUser;
 
     return (
       <PostForm
@@ -15,4 +16,5 @@ class PostsCreate extends Component {
   }
 }
 
-export default PostsCreate
+AdminPostCreate.contextType = MyContext
+export default AdminPostCreate
