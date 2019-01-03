@@ -73,6 +73,7 @@ class UsernamePostsRoute extends Component {
             <PostDetail
               userSession={userSession}
               match={match}
+              username={username}
             />
           }
         />

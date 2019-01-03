@@ -6,9 +6,9 @@ class PostDetail extends Component {
   state = { post: {} }
 
   componentDidMount = () => {
-    const { match, userSession } = this.props
+    const { match, userSession, username } = this.props
 
-    const options = { decrypt: false }
+    const options = { decrypt: false, username }
     userSession.getFile(`post-${match.params.post_id}.json`, options)
       .then((data) => this.setState({ post: JSON.parse(data)}))
   }
