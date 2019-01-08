@@ -1,21 +1,11 @@
 import React, { Component } from 'react'
 import _ from 'lodash';
 import { Table, Button } from 'react-bulma-components'
-import { POST_FILENAME } from 'utils/constants'
 import { withRouter } from 'react-router-dom'
 
 class PostsTable extends Component {
   deletePost(postId) {
-    const { userSession, posts } = this.props
-    const options = { encrypt: false }
-
-    const filteredPosts = _.filter(posts, (post) => post.id !== postId)
-
-    userSession.putFile(POST_FILENAME, JSON.stringify(filteredPosts), options)
-      .then(() => {
-        this.setState({ posts: filteredPosts })
-      })
-      .catch((err) => console.log(err.message))
+    this.props.deletePost(postId)
   }
 
   viewAdminPost(postId) {

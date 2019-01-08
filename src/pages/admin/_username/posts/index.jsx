@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import {
   Card,
   Content,
@@ -26,6 +27,20 @@ class AdminPosts extends Component {
       .catch((err) => console.log(err.message))
   }
 
+  deletePost = (postId) => {
+    const { userSession } = this.context.state.currentUser
+    const { posts } = this.state
+    const options = { encrypt: false }
+
+    const filteredPosts = _.filter(posts, (post) => post.id !== postId)
+
+    userSession.putFile(POST_FILENAME, JSON.stringify(filteredPosts), options)
+      .then(() => {
+        this.setState({ posts: filteredPosts })
+      })
+      .catch((err) => console.log(err.message))
+  }
+
   render() {
     const { posts } = this.state
     const { userSession, username } = this.context.state.currentUser
@@ -39,6 +54,7 @@ class AdminPosts extends Component {
               posts={posts}
               userSession={userSession}
               username={username}
+              deletePost={this.deletePost}
             />
           </Content>
         </Card.Content>
